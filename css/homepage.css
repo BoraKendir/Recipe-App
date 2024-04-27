@@ -1,0 +1,21 @@
+html {
+    background-color: #1DA1F2;
+    font-family: 'Chirp', sans-serif;
+}
+.profile-button, .logout-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin: 10px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
