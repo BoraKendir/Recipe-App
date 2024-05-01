@@ -1,0 +1,6 @@
+.image-preview img{
+    width: 15%;
+    height: 15%;
+    object-fit: cover;
+    border-radius: 10px;
+}

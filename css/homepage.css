@@ -1,6 +1,6 @@
 /* homepage.css */
 html, body {
-    background-color: #F5F1E7;
+    background-color: whitesmoke;
     height: 100%;
 }
 .welcome-title{
@@ -11,7 +11,7 @@ html, body {
     flex-wrap: wrap;
     flex-direction: row;
     text-align: center;
-    background-color: #F5F1E7;
+    background-color: whitesmoke;
 
 }
 .big-buttons {
@@ -24,7 +24,7 @@ html, body {
     width: 100%;
     height: 100%;
     text-align: center;
-    background-color: #F5F1E7;
+    background-color: whitesmoke;
 }
 footer {
     display: flex;

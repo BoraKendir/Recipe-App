@@ -5,30 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/recipe.css" rel="stylesheet"/>
     <link href="https://fonts.cdnfonts.com/css/chirp-2" rel="stylesheet">
+    <script src="https://cdn.roboflow.com/0.2.26/roboflow.js"></script>
 </head>
 <body>
     <div class="image-container">
         <div>
-            <input type="file" accept="image/*" onchange="previewImage(event)">
+            <input type="file" accept="image/*" onchange="previewImageAndPredict(event)">
         </div>
         <div class="image-preview"></div>
     </div>
+    <div class="prediction-container">
+        <div class="prediction-header">Predictions</div>
+        
+    </div>
 </body>
+
 <script>
-    function previewImage(event) {
-        const preview = document.querySelector('.image-preview');
-        preview.innerHTML = '';
+let model; // Global variable to hold the loaded model
 
-        const file = event.target.files[0];
-        const reader = new FileReader();
+// Load the model
+roboflow.auth({
+    publishable_key: "rf_DXQGN6XTTgPmbi4MEqiAvtUtj3b2"
+}).load({
+    model: "bitirme-abrpx",
+    version: 3 // <--- YOUR VERSION NUMBER
+}).then(function(loadedModel) {
+    model = loadedModel;
+    model.configure({
+        threshold: 0.3,
+        overlap: 0.5,
+        max_objects: 20
+    });
+});
 
-        reader.onload = function(event) {
-            const image = new Image();
-            image.src = event.target.result;
-            preview.appendChild(image);
+function previewImageAndPredict(event) {
+    const preview = document.querySelector('.image-preview');
+    preview.innerHTML = '';
+
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const image = new Image();
+        image.onload = function() {
+            model.detect(image).then(function(predictions) {
+                const uniqueClasses = [...new Set(predictions.map(prediction => prediction.class))];
+                console.log(uniqueClasses);
+                // Display predictions or do other processing
+            });
         };
+        image.src = event.target.result;
+        preview.appendChild(image);
+    };
+    reader.readAsDataURL(file);
+}
 
-        reader.readAsDataURL(file);
-    }
 </script>
 </html>
