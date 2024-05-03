@@ -37,7 +37,7 @@
     $insertQuery = "INSERT INTO `users` (`username`, `password`) VALUES ('$username','$password')";
 
     if (mysqli_query($conn,$insertQuery)) {
-        echo "Registiration successful! Redirecting to login page...";
+        echo "Registiration successful! Refreshing...";
         mysqli_close($conn);
         echo '<script>
         setTimeout(function() {

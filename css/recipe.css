@@ -1,6 +1,57 @@
 .image-preview img{
-    width: 15%;
-    height: 15%;
+    width: 25%;
+    height: 25%;
     object-fit: cover;
     border-radius: 10px;
+}
+footer {
+    display: flex;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+
+}
+input,form{
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    flex-grow: 1;
+    min-width: 0;
+}
+.footer-btn{
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    width: 100%;
+}
+.footer-btn a{
+
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    flex-grow: 1;
+    min-width: 0;
 }

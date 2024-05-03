@@ -11,14 +11,15 @@
     <link href="https://fonts.cdnfonts.com/css/chirp-2" rel="stylesheet">
 
 </head>
-
 <?php
     session_start();
-    //Getting and setting $_SESSION variables
+    // Access the username from the session
     if (isset($_SESSION["username"])) {
-        $SessionUsername = $_SESSION["username"];
+        $username = $_SESSION["username"];
     } else {
-        echo "User not logged in.";
+        echo "You are not logged in. Redirecting you to the login page...";
+        header("refresh:3;url=firstpage.html");
+        exit;
     }
 ?>
 <body>

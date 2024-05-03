@@ -14,7 +14,9 @@
     if (isset($_SESSION["username"])) {
         $username = $_SESSION["username"];
     } else {
-        echo "User not logged in.";
+        echo "You are not logged in. Redirecting you to the login page...";
+        header("refresh:3;url=firstpage.html");
+        exit;
     }
 ?>
     <body>
@@ -24,7 +26,7 @@
         </div>
         <div class="big-buttons">
             <div class="recipe-btn">
-                <a class="btn btn-primary" href="recipe.html">Find a recipe</a>  
+                <a class="btn btn-primary" href="recipe.php">Find a recipe</a>  
             </div>
             
             <div class="profile-btn">
