@@ -30,6 +30,11 @@
     
     if (mysqli_num_rows($result) > 0) {
         echo "Username already exists";
+        echo '<script>
+        setTimeout(function() {
+            window.location.href = "../firstpage.html";
+        }, 3000); // 3000 milliseconds = 3 seconds
+        </script>';
         mysqli_close($conn);
         exit();
     }
@@ -41,7 +46,7 @@
         mysqli_close($conn);
         echo '<script>
         setTimeout(function() {
-            window.location.href = "firstpage.html";
+            window.location.href = "../firstpage.html";
         }, 3000); // 3000 milliseconds = 3 seconds
         </script>';
         exit();

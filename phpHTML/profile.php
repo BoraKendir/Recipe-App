@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Your Profile</title>
-    <link rel="stylesheet" href="css/profile.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
     <link href="https://fonts.cdnfonts.com/css/chirp-2" rel="stylesheet">
 
 </head>
@@ -18,7 +18,7 @@
         $username = $_SESSION["username"];
     } else {
         echo "You are not logged in. Redirecting you to the login page...";
-        header("refresh:3;url=firstpage.html");
+        header("refresh:3;url=../firstpage.html");
         exit;
     }
 ?>
