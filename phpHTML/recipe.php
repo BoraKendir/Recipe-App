@@ -78,8 +78,7 @@ function previewImageAndPredict(event) {
     reader.onload = function(event) {
         const image = new Image();
         image.onload = function() {
-            image.src = event.target.result;
-            preview.appendChild(image);
+
             model.detect(image).then(function(predictions) {
                 const uniqueClasses = [...new Set(predictions.map(prediction => prediction.class))];
                 const predictionContainer = document.querySelector('.prediction-container');
@@ -98,7 +97,7 @@ function previewImageAndPredict(event) {
                 predictionContainer.innerHTML += '<h1>Second Step: Confirm the Ingredients</h1>'
                 confirm_ingredients(predictionContainer).then(function(selectedIngredients) {
                     predictionContainer.innerHTML += '<h1>Third Step: Get a Recipe</h1>';
-                    // Use selectedIngredients here
+                    console.log(selectedIngredients);
                 });
             });
         };
