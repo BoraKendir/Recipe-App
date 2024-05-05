@@ -58,7 +58,7 @@ roboflow.auth({
     publishable_key: "rf_DXQGN6XTTgPmbi4MEqiAvtUtj3b2"
 }).load({
     model: "bitirme-abrpx",
-    version: 3 // <--- YOUR VERSION NUMBER
+    version: 2 // <--- YOUR VERSION NUMBER
 }).then(function(loadedModel) {
     model = loadedModel;
     model.configure({
@@ -78,6 +78,8 @@ function previewImageAndPredict(event) {
     reader.onload = function(event) {
         const image = new Image();
         image.onload = function() {
+            image.src = event.target.result;
+            preview.appendChild(image);
             model.detect(image).then(function(predictions) {
                 const uniqueClasses = [...new Set(predictions.map(prediction => prediction.class))];
                 const predictionContainer = document.querySelector('.prediction-container');
@@ -94,7 +96,10 @@ function previewImageAndPredict(event) {
                 });
                 predictionList.appendChild(unorderedList);
                 predictionContainer.innerHTML += '<h1>Second Step: Confirm the Ingredients</h1>'
-                confirm_ingredients(predictionContainer);
+                confirm_ingredients(predictionContainer).then(function(selectedIngredients) {
+                    predictionContainer.innerHTML += '<h1>Third Step: Get a Recipe</h1>';
+                    // Use selectedIngredients here
+                });
             });
         };
         image.src = event.target.result;
