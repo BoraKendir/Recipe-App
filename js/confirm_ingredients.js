@@ -1,4 +1,4 @@
-function confirm_ingredients(element) {
+function confirm_ingredients(element, ingredients) {
     return new Promise((resolve, reject) => {
         var button = document.createElement("button");
         button.innerHTML = "If ingredients are not correct or some are missed, press this button to select them by hand";
@@ -11,7 +11,7 @@ function confirm_ingredients(element) {
             EarlyConfirm.style.display = "none";
             button.disabled = true;
             button.style.display = "none";
-            resolve([]); // Resolve with an empty array as ingredients are correct
+            resolve(ingredients); // Resolve with an the ingredients that were passed
         });
         button.addEventListener("click", function() {
             var selectedIngredients = [];
@@ -81,7 +81,7 @@ function confirm_ingredients(element) {
                 });
 
                 element.appendChild(ul);
-                resolve(selectedIngredients); // Resolve with the selected ingredients
+                resolve(selectedIngredients);
             });
         });
     });

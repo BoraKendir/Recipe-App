@@ -6,6 +6,7 @@
     <link href="../css/recipe.css" rel="stylesheet"/>
     <script src="https://cdn.roboflow.com/0.2.26/roboflow.js"></script>
     <script src="../js/confirm_ingredients.js"></script>
+    <script src="../js/get_recipe.js"></script>
     <link href="https://fonts.cdnfonts.com/css/chirp-2" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -95,10 +96,11 @@ function previewImageAndPredict(event) {
                 });
                 predictionList.appendChild(unorderedList);
                 predictionContainer.innerHTML += '<h1>Second Step: Confirm the Ingredients</h1>'
-                confirm_ingredients(predictionContainer).then(function(selectedIngredients) {
+                confirm_ingredients(predictionContainer,uniqueClasses).then(function(selectedIngredients) {
                     predictionContainer.innerHTML += '<h1>Third Step: Get a Recipe</h1>';
-                    console.log(selectedIngredients);
+                    var recipe_from_api = get_recipe(selectedIngredients);
                 });
+                
             });
         };
         image.src = event.target.result;
