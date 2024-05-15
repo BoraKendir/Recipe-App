@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/recipe.css" rel="stylesheet"/>
     <script src="https://cdn.roboflow.com/0.2.26/roboflow.js"></script>
-    <script src="../js/confirm_ingredients.js"></script>
+    <script src="../js/confirm_2.js"></script>
     <script src="../js/get_recipe.js"></script>
     <link href="https://fonts.cdnfonts.com/css/chirp-2" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -82,6 +82,15 @@ function previewImageAndPredict(event) {
 
             model.detect(image).then(function(predictions) {
                 const uniqueClasses = [...new Set(predictions.map(prediction => prediction.class))];
+                const classCountMap = new Map();
+                predictions.forEach(prediction => {
+                    const className = prediction.class;
+                    if (classCountMap.has(className)) {
+                        classCountMap.set(className, classCountMap.get(className) + 1);
+                    } else {
+                        classCountMap.set(className, 1);
+                    }
+                });
                 const predictionContainer = document.querySelector('.prediction-container');
                 predictionContainer.innerHTML = '';
                 predictionContainer.innerHTML += '<h2>Ingredients found in this picture:</h2>';
@@ -89,14 +98,21 @@ function previewImageAndPredict(event) {
                 predictionList.classList.add('prediction-list');
                 predictionContainer.appendChild(predictionList);
                 const unorderedList = document.createElement('ul');
+                classCountMap.forEach((count, className) => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = className + ': ' + count ;
+                    unorderedList.appendChild(listItem);
+                });
+                /*
                 uniqueClasses.forEach(className => {
                     const listItem = document.createElement('li');
                     listItem.textContent = className;
                     unorderedList.appendChild(listItem);
                 });
+                */
                 predictionList.appendChild(unorderedList);
                 predictionContainer.innerHTML += '<h1>Second Step: Confirm the Ingredients</h1>'
-                confirm_ingredients(predictionContainer,uniqueClasses).then(function(selectedIngredients) {
+                confirm_2(predictionContainer,uniqueClasses).then(function(selectedIngredients) {
                     predictionContainer.innerHTML += '<h1>Third Step: Get a Recipe</h1>';
                     var recipe_from_api = get_recipe(selectedIngredients);
                 });

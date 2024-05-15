@@ -1,7 +1,7 @@
 function confirm_ingredients(element, ingredients) {
     return new Promise((resolve, reject) => {
         var button = document.createElement("button");
-        button.innerHTML = "If ingredients are not correct or some are missed, press this button to select them by hand";
+        button.innerHTML = "If ingredients are not correct or some are missing, press this button to select them by hand";
         element.appendChild(button);
         var EarlyConfirm = document.createElement("button");
         EarlyConfirm.innerHTML = "Confirm if ingredients are correct";
@@ -17,27 +17,28 @@ function confirm_ingredients(element, ingredients) {
             var selectedIngredients = [];
             var grid = document.createElement("div");
             grid.className = "grid";
+            button.disabled = true;
             const IngredientList = [
-                'Fish',
-                'Broccoli',
-                'Tomato',
-                'Stuffed Bell Pepper',
+                'Beef',
                 'Bread',
+                'Broccoli',
+                'Butter',
                 'Carrot',
                 'Cheddar Cheese',
-                'Zucchini',
-                'Red Bell Pepper',
-                'Beef Cubes',
+                'Chicken',
+                'Cucumber',
+                'Egg',
+                'Eggplant',
+                'Fish',
                 'Garlic',
-                'Onion',
                 'Lettuce',
                 'Mushroom',
+                'Onion',
                 'Potato',
-                'Eggplant',
-                'Cucumber',
-                'Chicken',
-                'Egg',
-                'Butter'
+                'Red Bell Pepper',
+                'Stuffed Bell Pepper',
+                'Tomato',
+                'Zucchini'
             ];
             for (var i = 1; i <= 5; i++) {
                 for (var j = 1; j <= 4; j++) {
