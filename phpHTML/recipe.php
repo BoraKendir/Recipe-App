@@ -81,7 +81,6 @@ function previewImageAndPredict(event) {
         image.onload = function() {
 
             model.detect(image).then(function(predictions) {
-                const uniqueClasses = [...new Set(predictions.map(prediction => prediction.class))];
                 const classCountMap = new Map();
                 predictions.forEach(prediction => {
                     const className = prediction.class;
@@ -103,18 +102,73 @@ function previewImageAndPredict(event) {
                     listItem.textContent = className + ': ' + count ;
                     unorderedList.appendChild(listItem);
                 });
-                /*
-                uniqueClasses.forEach(className => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = className;
-                    unorderedList.appendChild(listItem);
-                });
-                */
+                const ingredientsArray = Array.from(classCountMap.entries()).map(([ingredient, amount]) => ({ ingredient, amount }));
                 predictionList.appendChild(unorderedList);
                 predictionContainer.innerHTML += '<h1>Second Step: Confirm the Ingredients</h1>'
-                confirm_2(predictionContainer,uniqueClasses).then(function(selectedIngredients) {
+                confirm_2(predictionContainer,ingredientsArray).then(function(selectedIngredients) {
                     predictionContainer.innerHTML += '<h1>Third Step: Get a Recipe</h1>';
-                    var recipe_from_api = get_recipe(selectedIngredients);
+                    // Create an array called selectedIngredients
+                    var selectedIngredientsArray = [];
+                    if (selectedIngredients) {
+                        selectedIngredients.forEach(item => {
+                            if (item.ingredient) { // Check if ingredient is defined
+                                selectedIngredientsArray.push(item.ingredient);
+                            }
+                        });
+                    }
+                    // Use the selectedIngredientsMap to get the recipe
+                    console.log('from confirm_2 '+selectedIngredients);
+                    console.log('turned into array '+selectedIngredientsArray);
+                    get_recipe(selectedIngredientsArray).then(function(recipeList) {
+                        console.log('Recipes:', recipeList);
+                        const recipeContainer = document.querySelector('.recipe-container');
+                        recipeContainer.innerHTML = '';
+                        if (Array.isArray(recipeList)) {
+                            let recipeIndex = 0; // Global variable to keep track of the current recipe index
+
+                            function displayRecipes(recipeList) {
+                                const recipeContainer = document.querySelector('.recipe-container');
+                                recipeContainer.innerHTML = '';
+
+                                for (let i = recipeIndex; i < recipeIndex + 5 && i < recipeList.length; i++) {
+                                    const recipe = recipeList[i];
+                                    const recipeDiv = document.createElement('div');
+                                    recipeDiv.classList.add('indiv-recipe');
+                                    recipeDiv.innerHTML = `
+                                        <a href="${recipe.url}" target="_blank">
+                                            <h3>${recipe.name}</h3>
+                                        </a>
+                                    `;
+                                    recipeContainer.appendChild(recipeDiv);
+                                }
+
+                                if (recipeIndex > 0) {
+                                    const backButton = document.createElement('button');
+                                    backButton.textContent = 'Back';
+                                    backButton.addEventListener('click', () => {
+                                        recipeIndex -= 5;
+                                        displayRecipes(recipeList);
+                                    });
+                                    recipeContainer.appendChild(backButton);
+                                }
+
+                                if (recipeIndex + 5 < recipeList.length) {
+                                    const nextButton = document.createElement('button');
+                                    nextButton.textContent = 'Next';
+                                    nextButton.addEventListener('click', () => {
+                                        recipeIndex += 5;
+                                        displayRecipes(recipeList);
+                                    });
+                                    recipeContainer.appendChild(nextButton);
+                                }
+                            }
+
+                            displayRecipes(recipeList);
+                        }
+                        else {
+                            console.error('Recipe is not an array:');
+                        }
+                    });
                 });
                 
             });

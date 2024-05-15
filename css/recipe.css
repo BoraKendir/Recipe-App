@@ -55,3 +55,6 @@ input,form{
     flex-grow: 1;
     min-width: 0;
 }
+.indiv-recipe:hover {
+    transform: scale(0.9);
+}

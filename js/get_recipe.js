@@ -6,7 +6,7 @@ function get_recipe(ingredient_list){
         var MIN = ingredient_list.length;
         var MAX = MIN < 10 ? MIN + 2 : MIN + 3;
         var ingr = MIN.toString() + "-" + MAX.toString();
-        console.log(ingr);
+        console.log(ingredient_list);
         var q = ingredient_list.join(" ");
         console.log(q);
 
@@ -16,7 +16,7 @@ function get_recipe(ingredient_list){
             app_id: application_id,
             app_key: application_keys,
             ingr: ingr,
-            random: true
+            random: false
         };
         const queryString = new URLSearchParams(params).toString();
         console.log(`${url_for_api}?${queryString}`);

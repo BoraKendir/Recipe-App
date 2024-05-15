@@ -13,6 +13,10 @@ function confirm_2(element, ingredients) {
             EarlyConfirm.style.display = "none";
             button.disabled = true;
             button.style.display = "none";
+            console.log(ingredients);
+            var confirmationMessage = document.createElement("h2");
+            confirmationMessage.innerHTML = "You confirmed the list above";
+            element.appendChild(confirmationMessage);
             resolve(ingredients); // Resolve with the ingredients that were passed
         });
 
@@ -43,11 +47,11 @@ function confirm_2(element, ingredients) {
                 }
 
                 if (existingItem) {
-                    existingItem.innerHTML = `item: ${selectedIngredient}, amount: ${selectAmount}`;
+                    existingItem.innerHTML = `${selectedIngredient},${selectAmount}`;
                 } else {
                     const itemDiv = document.createElement("div");
                     itemDiv.dataset.ingredient = selectedIngredient;
-                    itemDiv.innerHTML = `item: ${selectedIngredient}, amount: ${selectAmount}`;
+                    itemDiv.innerHTML = `${selectedIngredient},${selectAmount}`;
                     selectedBox.appendChild(itemDiv);
                 }
             });
@@ -78,11 +82,12 @@ function confirm_2(element, ingredients) {
             finalConfirmButton.innerHTML = "Confirm Selected Ingredients";
             finalConfirmButton.addEventListener("click", function() {
                 const selectedIngredients = Array.from(selectedBox.children).map(child => {
-                    const [ingredient, amount] = child.innerHTML.split(', amount: ');
+                    const [ingredient, amount] = child.innerHTML.split(',');
+                    
                     return { ingredient, amount };
                 });
-
                 if (selectedIngredients.length > 0) {
+                    console.log(selectedIngredients);
                     resolve(selectedIngredients);
                 } else {
                     alert("No ingredients selected.");
