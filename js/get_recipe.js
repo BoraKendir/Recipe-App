@@ -30,7 +30,6 @@ function get_recipe(ingredient_list){
                     url: recipe.url,
                 };
             });
-            console.log(recipes);
             resolve(recipes);
             
         })

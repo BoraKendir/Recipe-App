@@ -51,7 +51,7 @@ function confirm_2(element, ingredients) {
                 } else {
                     const itemDiv = document.createElement("div");
                     itemDiv.dataset.ingredient = selectedIngredient;
-                    itemDiv.innerHTML = `${selectedIngredient},${selectAmount}`;
+                    itemDiv.innerHTML = `${selectedIngredient}: ${selectAmount}`;
                     selectedBox.appendChild(itemDiv);
                 }
             });
@@ -82,7 +82,7 @@ function confirm_2(element, ingredients) {
             finalConfirmButton.innerHTML = "Confirm Selected Ingredients";
             finalConfirmButton.addEventListener("click", function() {
                 const selectedIngredients = Array.from(selectedBox.children).map(child => {
-                    const [ingredient, amount] = child.innerHTML.split(',');
+                    const [ingredient, amount] = child.innerHTML.split(': ');
                     
                     return { ingredient, amount };
                 });
