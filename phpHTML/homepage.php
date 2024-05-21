@@ -35,18 +35,18 @@
                 </form>
             </div>
         </div>
-        <footer>
-            <div class="footer-btn">
-                <a class="btn btn-primary" href="contact.html">Contact</a>  
-            </div>
-            <div class="footer-btn">
-                <a class="btn btn-primary" href="about.html">About the App</a>  
-            </div>
-            <div class="footer-btn">
-                <form method="get" action="logout.php">
-                    <input type="submit" value="Logout" class="btn btn-primary" />
-                </form>
-            </div>
-        </footer>
+    <footer>
+        <div class="footer-btn">
+            <a class="btn btn-primary" href="contact.html">Contact</a>  
+        </div>
+        <div class="footer-btn">
+            <a class="btn btn-primary" href="about.html">About the App</a>  
+        </div>
+        <div class="footer-btn">
+            <form method="get" action="logout.php">
+                <input type="submit" value="Logout" class="btn btn-primary" />
+            </form>
+        </div>
+    </footer>
     </body>
 </html>

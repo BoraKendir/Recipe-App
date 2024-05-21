@@ -6,7 +6,7 @@
     <title>Recipe</title>
     <link href="../css/recipe.css" rel="stylesheet"/>
     <script src="https://cdn.roboflow.com/0.2.26/roboflow.js"></script>
-    <script src="../js/confirm_2.js"></script>
+    <script src="../js/confirm_ingredients.js"></script>
     <script src="../js/get_recipe.js"></script>
     <link href="https://fonts.cdnfonts.com/css/chirp-2" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -47,6 +47,9 @@
             <a class="btn btn-primary" href="about.html">About the App</a>  
         </div>
         <div class="footer-btn">
+            <a class="btn btn-primary" href="profile.php">Profile</a>  
+        </div>
+        <div class="footer-btn">
             <form method="get" action="logout.php">
                 <input type="submit" value="Logout" class="btn btn-primary" />
             </form>
@@ -54,13 +57,14 @@
     </footer>
 
     <script>
+
     let model; // Global variable to hold the loaded model
     // Load the model
     roboflow.auth({
         publishable_key: "rf_DXQGN6XTTgPmbi4MEqiAvtUtj3b2"
     }).load({
         model: "bitirme-abrpx",
-        version: 2 // <--- YOUR VERSION NUMBER
+        version: 4 // <--- YOUR VERSION NUMBER
     }).then(function(loadedModel) {
         model = loadedModel;
         model.configure({
@@ -109,7 +113,7 @@
                     predictionContainer.innerHTML += '<h1>Second Step: Confirm the Ingredients</h1>';
                     
                     const ingredientsArray = Array.from(classCountMap.entries()).map(([ingredient, amount]) => ({ ingredient, amount }));
-                    confirm_2(predictionContainer, ingredientsArray).then(function(selectedIngredients) {
+                    confirm_ingredients(predictionContainer, ingredientsArray).then(function(selectedIngredients) {
                         predictionContainer.innerHTML += '<h1>Third Step: Get a Recipe</h1>';
                         // Create an array called selectedIngredients
                         var selectedIngredientsArray = [];
@@ -139,7 +143,7 @@
                                                 <h3 id="recipe_name">${recipe.name}</h3>
                                             </a>
                                             <form onsubmit="return add_recipe_ajax(event)">
-                                                <button type="submit" class="add-button">Add</button>
+                                                <button type="submit" class="btn btn-primary">Add</button>
                                             </form>
                                         `;
                                         console.log(recipe.url,recipe.url, userID);
@@ -149,6 +153,7 @@
                                     if (recipeIndex > 0) {
                                         const backButton = document.createElement('button');
                                         backButton.textContent = 'Back';
+                                        backButton.className = "page-link";
                                         backButton.addEventListener('click', () => {
                                             recipeIndex -= 5;
                                             displayRecipes(recipeList);
@@ -158,6 +163,7 @@
                                     if (recipeIndex + 5 < recipeList.length) {
                                         const nextButton = document.createElement('button');
                                         nextButton.textContent = 'Next';
+                                        nextButton.className = "page-link";
                                         nextButton.addEventListener('click', () => {
                                             recipeIndex += 5;
                                             displayRecipes(recipeList);
