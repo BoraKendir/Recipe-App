@@ -2,11 +2,13 @@ function confirm_ingredients(element, ingredients) {
     return new Promise((resolve, reject) => {
         var button = document.createElement("button");
         button.className = "btn btn-primary";
+        button.id = "ListCreator";
         button.innerHTML = "If ingredients are not correct or some are missing, press this button to select them by hand";
         element.appendChild(button);
 
         var EarlyConfirm = document.createElement("button");
         EarlyConfirm.className = "btn btn-primary";
+        EarlyConfirm.id = "EarlyConfirm";
         EarlyConfirm.innerHTML = "Confirm if ingredients are correct";
         element.appendChild(EarlyConfirm);
 
@@ -23,6 +25,9 @@ function confirm_ingredients(element, ingredients) {
         });
 
         button.addEventListener("click", function() {
+            button.disabled = true;
+            EarlyConfirm.disabled = true;
+            
             const IngredientList = [   
                 'Aubergine',
                 'Bell-Pepper',
@@ -95,9 +100,10 @@ function confirm_ingredients(element, ingredients) {
             resultContainer.appendChild(selectedBox);
             element.appendChild(resultContainer);
 
-            // Add the new confirm button
+            
             const finalConfirmButton = document.createElement("button");
             finalConfirmButton.className = "btn btn-primary";
+            finalConfirmButton.id = "finalConfirmButton";
             finalConfirmButton.innerHTML = "Confirm Selected Ingredients";
             finalConfirmButton.addEventListener("click", function() {
                 const selectedIngredients = Array.from(selectedBox.children).map(child => {

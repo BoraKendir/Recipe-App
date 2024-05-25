@@ -25,6 +25,43 @@ html, body {
 
     margin: 20px;
 }
+#EarlyConfirm{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#ListCreator{
+    margin-right: 10px;
+}
+#finalConfirmButton{
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+.recipe-container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.indiv-recipe{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+}
 
 
 

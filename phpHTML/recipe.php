@@ -20,7 +20,7 @@
         $userId = $_SESSION["user_id"];
     } else {
         echo "You are not logged in. Redirecting you to the login page...";
-        header("refresh:3;url=../firstpage.html");
+        header("refresh:3;url=../index.html");
         exit;
     }
     ?>

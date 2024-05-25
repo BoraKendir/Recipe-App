@@ -15,7 +15,7 @@
         $username = $_SESSION["username"];
     } else {
         echo "You are not logged in. Redirecting you to the login page...";
-        header("refresh:3;url=../firstpage.html");
+        header("refresh:3;url=../index.html");
         exit;
     }
 ?>
@@ -25,14 +25,19 @@
             <h1 style="background-color: #F5F1E7;">Welcome <?php echo $_SESSION["username"]; ?></h1>
         </div>
         <div class="big-buttons">
-            <div class="recipe-btn">
-                <a class="btn btn-primary" href="recipe.php">Find a recipe</a>  
+            <div class="recipe-button">
+                <a class="btn btn-primary" href="recipe.php">
+                    <img src="../recipe256.png" alt="Recipe" class="button-icon">
+                    <span class="button-text">Find a Recipe</span>
+                </a>  
             </div>
+
             
-            <div class="profile-btn">
-                <form method="get" action="profile.php">
-                    <input type="submit" value="Profile" class="btn btn-primary" />
-                </form>
+            <div class="profile-button">
+                <a class="btn btn-primary" href="profile.php">
+                    <img src="../user256.png" alt="Profile" class="button-icon">
+                    <span class="button-text">Visit Your Profile</span>
+                </a>
             </div>
         </div>
     <footer>

@@ -32,7 +32,7 @@
         echo "Username already exists";
         echo '<script>
         setTimeout(function() {
-            window.location.href = "../firstpage.html";
+            window.location.href = "../index.html";
         }, 3000); // 3000 milliseconds = 3 seconds
         </script>';
         mysqli_close($conn);
@@ -46,7 +46,7 @@
         mysqli_close($conn);
         echo '<script>
         setTimeout(function() {
-            window.location.href = "../firstpage.html";
+            window.location.href = "../index.html";
         }, 3000); // 3000 milliseconds = 3 seconds
         </script>';
         exit();

@@ -18,7 +18,7 @@
         $username = $_SESSION["username"];
     } else {
         echo "You are not logged in. Redirecting you to the login page...";
-        header("refresh:3;url=../firstpage.html");
+        header("refresh:3;url=../index.html");
         exit;
     }
 ?>
@@ -86,14 +86,15 @@
                 } 
 
                 $total_pages = ceil(mysqli_num_rows(mysqli_query($conn, "SELECT recipe_name FROM recipes WHERE user_id = $userId")) / $limit);
-
+                echo '<div class="buttons">';
                 if ($page < $total_pages) {
-                    echo "<a href='profile.php?page=" . ($page + 1) . "' class='page-link'>Next</a>";
+                    echo "<a href='profile.php?page=" . ($page + 1) . "' class='page-link' id='next'>Next</a>";
                 }
 
                 if ($page > 1) {
-                    echo "<a href='profile.php?page=" . ($page - 1) . "' class='page-link'>Previous</a>";
+                    echo "<a href='profile.php?page=" . ($page - 1) . "' class='page-link' id='prev'>Previous</a>";
                 }
+                echo '</div>';
             }
         } else {
             echo "<div class='recipe-warning'>";
