@@ -33,13 +33,12 @@ html, body {
     margin-right: 10px;
 }
 #finalConfirmButton{
-    margin-left: 10px;
     margin-right: 10px;
 
 }
-.recipe-container{
+.recipe-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -48,6 +47,14 @@ html, body {
     border-radius: 10px;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+#selectedBox{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    align-content: flex-start;
 }
 .indiv-recipe{
     display: flex;
@@ -60,10 +67,11 @@ html, body {
     border-radius: 10px;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-
 }
-
-
+#next-btn,#back-btn{
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
 footer {
     display: flex;

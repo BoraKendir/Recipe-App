@@ -6,10 +6,23 @@
 <head>
     <title>Your Profile</title>
     <link rel="stylesheet" href="../css/profile.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.cdnfonts.com/css/chirp-2" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('status')) {
+                const status = params.get('status');
+                if (status === 'success') {
+                    alert('Recipe removed successfully.');
+                } else if (status === 'error') {
+                    alert('Error removing recipe.');
+                }
+            }
+        }
+    </script>
 </head>
 <?php
     session_start();
@@ -67,15 +80,19 @@
                 $limit = 10;
                 $offset = ($page - 1) * $limit;
 
-                $sql = "SELECT recipe_name, recipe_url FROM recipes WHERE user_id = $userId LIMIT $limit OFFSET $offset";
+                $sql = "SELECT recipe_id, recipe_name, recipe_url FROM recipes WHERE user_id = $userId LIMIT $limit OFFSET $offset";
                 $result = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result) > 0) {
+                    echo "<div class='profile-recipes'>";
                     // Output data of each row
                     while($row = mysqli_fetch_assoc($result)) {
                         echo "<div class='profile-recipe-card'>";
-                        echo "<a href='" . $row["recipe_url"] . "'>" . $row["recipe_name"] . "</a>";
-                        echo "<button class='btn btn-danger'>Remove</button>";
+                        echo "<a href='" . $row["recipe_url"] . "' target='_blank'>" . $row["recipe_name"] . "</a>";
+                        echo "<form method='post' action='remove_recipe.php'>";
+                        echo "<input type='hidden' name='recipe_id' value='" . $row["recipe_id"] . "' />";
+                        echo "<button type='submit' class='btn btn-danger'>Remove</button>";
+                        echo "</form>";
                         echo "</div>";
                     }
                 } else {
@@ -95,6 +112,7 @@
                     echo "<a href='profile.php?page=" . ($page - 1) . "' class='page-link' id='prev'>Previous</a>";
                 }
                 echo '</div>';
+                echo "</div>";
             }
         } else {
             echo "<div class='recipe-warning'>";

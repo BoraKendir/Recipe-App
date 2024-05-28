@@ -25,18 +25,11 @@ html, body {
     height: 100%;
     text-align: center;
     background-color: whitesmoke;
+    
 }
-.recipe-button {
-    text-align: center; /* Center the content if needed */
-}
-.profile-button {
-    text-align: center; /* Center the content if needed */
-}
-
-.btn {
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
+.profile-button:hover, .recipe-button:hover {
+    transform: scale(1.1);
+    transition: 0.15s;
 }
 
 .button-icon {

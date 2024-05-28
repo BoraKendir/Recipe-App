@@ -47,7 +47,7 @@
             <a class="btn btn-primary" href="about.html">About the App</a>  
         </div>
         <div class="footer-btn">
-            <a class="btn btn-primary" href="profile.php">Profile</a>  
+            <a class="btn btn-primary" href="homepage.php">Homepage</a>  
         </div>
         <div class="footer-btn">
             <form method="get" action="logout.php">
@@ -64,19 +64,18 @@
         publishable_key: "rf_DXQGN6XTTgPmbi4MEqiAvtUtj3b2"
     }).load({
         model: "bitirme-abrpx",
-        version: 4 // <--- YOUR VERSION NUMBER
+        version: 7 // <--- YOUR VERSION NUMBER
     }).then(function(loadedModel) {
         model = loadedModel;
         model.configure({
             threshold: 0.3,
-            overlap: 0.5,
+            overlap: 0.3,
             max_objects: 20
         });
     });
 
     function previewImageAndPredict(event) {
         var userID = <?php echo $userId; ?>;
-        console.log('User ID:', userID);
         const preview = document.querySelector('.image-preview');
         preview.innerHTML = '';
 
@@ -125,8 +124,8 @@
                             });
                         }
                         // Use the selectedIngredientsMap to get the recipe
-                        console.log('from confirm_2 '+selectedIngredients);
-                        console.log('turned into array '+selectedIngredientsArray);
+                        //console.log('from confirm_ingedints '+selectedIngredients);
+                        //console.log('turned into array '+selectedIngredientsArray);
                         get_recipe(selectedIngredientsArray).then(function(recipeList) {
                             const recipeContainer = document.querySelector('.recipe-container');
                             recipeContainer.innerHTML = '';
@@ -139,10 +138,10 @@
                                         const recipeDiv = document.createElement('div');
                                         recipeDiv.classList.add('indiv-recipe');
                                         recipeDiv.innerHTML = `
-                                            <a id="recipe_url" href="${recipe.url}" target="_blank">
-                                                <h3 id="recipe_name">${recipe.name}</h3>
+                                            <a id="recipe_url_${i}" href="${recipe.url}" target="_blank">
+                                                <h3 id="recipe_name_${i}">${recipe.name}</h3>
                                             </a>
-                                            <form onsubmit="return add_recipe_ajax(event)">
+                                            <form onsubmit="return add_recipe_ajax(event, '${recipe.url}', '${recipe.name}')">
                                                 <button type="submit" class="btn btn-primary">Add</button>
                                             </form>
                                         `;
@@ -154,6 +153,7 @@
                                         const backButton = document.createElement('button');
                                         backButton.textContent = 'Back';
                                         backButton.className = "page-link";
+                                        backButton.id = 'back-btn';
                                         backButton.addEventListener('click', () => {
                                             recipeIndex -= 5;
                                             displayRecipes(recipeList);
@@ -163,6 +163,7 @@
                                     if (recipeIndex + 5 < recipeList.length) {
                                         const nextButton = document.createElement('button');
                                         nextButton.textContent = 'Next';
+                                        nextButton.id = 'next-btn';
                                         nextButton.className = "page-link";
                                         nextButton.addEventListener('click', () => {
                                             recipeIndex += 5;
@@ -184,12 +185,11 @@
         };
         reader.readAsDataURL(file);
     }
-    function add_recipe_ajax(){
-
+    function add_recipe_ajax(event, recipeUrl, recipeName){
         event.preventDefault();
         var data = new FormData();
-        data.append('recipe_url', document.getElementById('recipe_url').href);
-        data.append('recipe_name', document.getElementById('recipe_name').textContent);
+        data.append('recipe_url', recipeUrl);
+        data.append('recipe_name', recipeName);
         data.append('user_id', <?php echo $userId; ?>);
 
         var xhr = new XMLHttpRequest();

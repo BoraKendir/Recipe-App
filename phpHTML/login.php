@@ -28,16 +28,17 @@
     $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
     $result = mysqli_query($conn,$sql) or die("11");
 
-    //Query to get the user_id of the user, it has some uses in procedures
-    $sql2 = "SELECT user_id FROM users WHERE username = '$username' AND password = '$password'";
-    $result2 = mysqli_query($conn,$sql2) or die("11");
 
-    //Fetching the query results
-    $row = mysqli_fetch_assoc($result2);
-    $userId = $row["user_id"];
 
     //if the user is in database
 if (mysqli_num_rows($result) > 0) {
+        //Query to get the user_id of the user, it has some uses in procedures
+        $sql2 = "SELECT user_id FROM users WHERE username = '$username' AND password = '$password'";
+        $result2 = mysqli_query($conn,$sql2) or die("11");
+    
+        //Fetching the query results
+        $row = mysqli_fetch_assoc($result2);
+        $userId = $row["user_id"];
     echo "Login successful! Redirecting to homepage...";
     session_start();
     $_SESSION["username"] = $username;
@@ -46,7 +47,7 @@ if (mysqli_num_rows($result) > 0) {
     echo '<script>
         setTimeout(function() {
             window.location.href = "homepage.php";
-        }, 3000); // 3000 milliseconds = 3 seconds
+        }, 2500); // 2500 milliseconds = 2.5 seconds
     </script>';
 
     exit();

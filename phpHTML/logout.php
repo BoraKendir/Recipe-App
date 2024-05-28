@@ -2,7 +2,6 @@
 This file was provided by the teacher/assistant 
 --->
 <?php
-session_start();
 
 // Clear all session variables
 session_unset();
