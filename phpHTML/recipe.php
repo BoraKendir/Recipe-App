@@ -25,7 +25,7 @@
     }
     ?>
 
-    <h1>First Step: Upload a Picture</h1>
+    <h1>First Step: Upload an Image</h1>
     <div class="flex-container">
         
         <div class="image-container">
@@ -64,7 +64,7 @@
         publishable_key: "rf_DXQGN6XTTgPmbi4MEqiAvtUtj3b2"
     }).load({
         model: "bitirme-abrpx",
-        version: 7 // <--- YOUR VERSION NUMBER
+        version: 17 // <--- YOUR VERSION NUMBER
     }).then(function(loadedModel) {
         model = loadedModel;
         model.configure({
@@ -98,7 +98,7 @@
                     });
                     const predictionContainer = document.querySelector('.prediction-container');
                     predictionContainer.innerHTML = '';
-                    predictionContainer.innerHTML += '<h2>Ingredients found in this picture:</h2>';
+                    predictionContainer.innerHTML += '<h2>Ingredients found in this image:</h2>';
                     const predictionList = document.createElement('div');
                     predictionList.classList.add('prediction-list');
                     predictionContainer.appendChild(predictionList);
