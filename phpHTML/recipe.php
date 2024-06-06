@@ -64,7 +64,7 @@
         publishable_key: "rf_DXQGN6XTTgPmbi4MEqiAvtUtj3b2"
     }).load({
         model: "bitirme-abrpx",
-        version: 17 // <--- YOUR VERSION NUMBER
+        version: 8 // <--- YOUR VERSION NUMBER
     }).then(function(loadedModel) {
         model = loadedModel;
         model.configure({
@@ -73,7 +73,7 @@
             max_objects: 20
         });
     });
-
+    // Function to preview the image and make predictions
     function previewImageAndPredict(event) {
         var userID = <?php echo $userId; ?>;
         const preview = document.querySelector('.image-preview');
@@ -81,12 +81,13 @@
 
         const file = event.target.files[0];
         const reader = new FileReader();
-
+        // If a file is selected, read the file and make predictions
         reader.onload = function(event) {
             const image = new Image();
             image.onload = function() {
-
+                // Loaded model is used to make predictions
                 model.detect(image).then(function(predictions) {
+                    //Create a map to store the class and count of each class
                     const classCountMap = new Map();
                     predictions.forEach(prediction => {
                         const className = prediction.class;
@@ -96,6 +97,7 @@
                             classCountMap.set(className, 1);
                         }
                     });
+                    // Display the predictions
                     const predictionContainer = document.querySelector('.prediction-container');
                     predictionContainer.innerHTML = '';
                     predictionContainer.innerHTML += '<h2>Ingredients found in this image:</h2>';
@@ -110,7 +112,7 @@
                     });
                     predictionList.appendChild(unorderedList);
                     predictionContainer.innerHTML += '<h1>Second Step: Confirm the Ingredients</h1>';
-                    
+                    //User is asked to confirm the ingredients or deny and upload their own list
                     const ingredientsArray = Array.from(classCountMap.entries()).map(([ingredient, amount]) => ({ ingredient, amount }));
                     confirm_ingredients(predictionContainer, ingredientsArray).then(function(selectedIngredients) {
                         predictionContainer.innerHTML += '<h1>Third Step: Get a Recipe</h1>';
@@ -124,11 +126,10 @@
                             });
                         }
                         // Use the selectedIngredientsMap to get the recipe
-                        //console.log('from confirm_ingedints '+selectedIngredients);
-                        //console.log('turned into array '+selectedIngredientsArray);
                         get_recipe(selectedIngredientsArray).then(function(recipeList) {
                             const recipeContainer = document.querySelector('.recipe-container');
                             recipeContainer.innerHTML = '';
+                            //Pagination logic starts here
                             if (Array.isArray(recipeList)) {
                                 let recipeIndex = 0; // Variable to keep track of the current recipe index
                                 function displayRecipes(recipeList) {
@@ -185,6 +186,7 @@
         };
         reader.readAsDataURL(file);
     }
+    // Function to add a recipe to the user's profile
     function add_recipe_ajax(event, recipeUrl, recipeName){
         event.preventDefault();
         var data = new FormData();

@@ -1,5 +1,7 @@
 <!-- profile.php 
     This file displays the user's profile page.
+    It shows the user's recipes and allows the user to remove recipes.
+    The user can also log out from this page.
 -->
 <!DOCTYPE html>
 <html>
@@ -59,6 +61,8 @@
 </body>
 </html>
 <?php
+    // Function to get the recipes of the user from the database
+
     function getRecipes($userId) {
         $servername = "localhost";
         $username = "root";
@@ -85,7 +89,7 @@
 
                 if (mysqli_num_rows($result) > 0) {
                     echo "<div class='profile-recipes'>";
-                    // Output data of each row
+                    // Output data of each row, pagination logic
                     while($row = mysqli_fetch_assoc($result)) {
                         echo "<div class='profile-recipe-card'>";
                         echo "<a href='" . $row["recipe_url"] . "' target='_blank'>" . $row["recipe_name"] . "</a>";

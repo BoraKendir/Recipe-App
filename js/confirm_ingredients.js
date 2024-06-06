@@ -1,3 +1,5 @@
+//This file contains the function that allows the user to confirm the ingredients that were detected by the model.
+// If the user is not satisfied with the detected ingredients, they can select the ingredients manually from a dropdown list.
 function confirm_ingredients(element, ingredients) {
     return new Promise((resolve, reject) => {
         var button = document.createElement("button");

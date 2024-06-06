@@ -1,4 +1,9 @@
-<!-- homepage.php -->
+<!-- homepage.php 
+    This file is the homepage of the application. It displays a welcome message to the user and provides two buttons to navigate to the recipe search page and the user profile page.
+    The user's username is displayed on the page.
+    The user must be logged in to access this page.
+    It also has extra pages that are not necessary for the functionality of the application.
+-->
 <!DOCTYPE html>
 <html>
     <head>

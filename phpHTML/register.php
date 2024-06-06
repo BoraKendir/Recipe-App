@@ -3,6 +3,9 @@
 <body>
     <h1>Registration Result</h1>
 <?php
+
+    // This script is used to register a user to the database
+    // It is called from the index page
     $servername = "localhost";
     $dbusername = "root";
     $dbpassword = "mysql";

@@ -1,5 +1,5 @@
 <!--- 
-This file was provided by the teacher/assistant 
+Logout the user from the session and redirect them to the login page.
 --->
 <?php
 

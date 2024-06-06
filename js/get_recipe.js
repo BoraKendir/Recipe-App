@@ -1,3 +1,4 @@
+//Function to get recipe from Edamam API
 function get_recipe(ingredient_list){
     return new Promise(function(resolve, reject) {
         const url_for_api = 'https://api.edamam.com/api/recipes/v2';

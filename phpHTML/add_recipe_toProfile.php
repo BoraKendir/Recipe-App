@@ -1,6 +1,7 @@
 <?php
+// This script is used to add a recipe to the database
+// It is called from the add recipe form(button)
 session_start();
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $url = $_POST['recipe_url'];
     $name = $_POST['recipe_name'];

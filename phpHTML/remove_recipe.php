@@ -1,4 +1,6 @@
 <?php
+// This script is used to remove a recipe from the database
+// It is called from the profile page
 session_start();
 
 if (isset($_SESSION["user_id"]) && isset($_POST["recipe_id"])) {
