@@ -5,7 +5,7 @@ function confirm_ingredients(element, ingredients) {
         var button = document.createElement("button");
         button.className = "btn btn-primary";
         button.id = "ListCreator";
-        button.innerHTML = "If ingredients are not correct or some are missing, press this button to select them by hand";
+        button.innerHTML = "If ingredients are not correct or some are missing, press this button to select them manually";
         element.appendChild(button);
 
         var EarlyConfirm = document.createElement("button");
