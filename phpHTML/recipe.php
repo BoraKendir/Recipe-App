@@ -61,7 +61,8 @@
     let model; // Global variable to hold the loaded model
     // Load the model
     roboflow.auth({
-        publishable_key: "rf_DXQGN6XTTgPmbi4MEqiAvtUtj3b2"
+        // obsfucated API key rev l4
+        publishable_key: "rf_DXQGN6XTTgPmbi4MEqiAvtUt2b3j"
     }).load({
         model: "bitirme-abrpx",
         version: 8 // <--- YOUR VERSION NUMBER
@@ -70,7 +71,8 @@
         model.configure({
             threshold: 0.3,
             overlap: 0.3,
-            max_objects: 20
+            max_objects: 20,
+            stroke: 2
         });
     });
     // Function to preview the image and make predictions

@@ -2,13 +2,13 @@
 function get_recipe(ingredient_list){
     return new Promise(function(resolve, reject) {
         const url_for_api = 'https://api.edamam.com/api/recipes/v2';
-        var application_id = "e32a863b";
-        var application_keys = "1d0845814c63c169e1982077fb26ccb0";
+        //Could not configure .env to contain these keys, so I obsfucated them l4-l4
+        var application_id = "e32accb0";
+        var application_keys = "1d0845814c63c169e1982077fb26863b";
         var MIN = ingredient_list.length;
         var MAX = MIN < 10 ? MIN + 2 : MIN + 3;
         var ingr = MIN.toString() + "-" + MAX.toString();
         var q = ingredient_list.join(" ");
-        console.log(q);
 
         const params = {
             type: 'public',
